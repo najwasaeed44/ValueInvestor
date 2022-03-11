@@ -49,13 +49,16 @@ Predict stock price valuations on a daily, weekly and monthly basis. Recommend B
 
 
 This work will be divided into three parts, which are:
-1) Analysing and preprocessing the data.
-2) Stock Price forecasting.
-3) Building a classifier to predict to buy, sell or hold the stock based on the training features.
+
+**1) Analysing and preprocessing the data.**
+
+**2) Stock Price forecasting.**
+
+**3) Building a classifier to predict to buy, sell or hold the stock based on the training features.**
 
 To achieve this, both the `analysing.py` and `models.py` python files will be used.
 
-### 1) Using `analysing.py` file to:
+### 1.1) Using `analysing.py` file to:
   - Data preprocessing: 
     - Make the index equal to the date. 
     - Remove special characters or string(s) like the "M" in the `vol` column, which mean the volume in millions. 
@@ -69,26 +72,55 @@ To achieve this, both the `analysing.py` and `models.py` python files will be us
  
  - Plotting some stat:
    - The price to notice if there are any trends and to take a general idea about the price time series, like in the following picture.
-       <div align="center"><img src="img/price_ex.jpg" width="500px" height="500px"></div>
+       <div align="center"><img src="img/price_ex.png" width="1000px" height="500px"></div>
 
    - The year and months box plot as in the following pictures, but we need to take into our mind that, 
-the available data in `2021` is only for the first quarter, so this could be changing with more data for the rest of the 
-year.
-  
-    <div align="center"><img src="img/price_ex.jpg" width="500px" height="500px"></div>
-  
-
-    <div align="center"><img src="img/year_box_plot_ex.jpg" width="500px" height="500px"></div>
-    <div align="center"><img src="img/months_box_plot_ex.jpg" width="500px" height="500px"></div>
+     the available data in `2021` is only for the first quarter, so this could be changing with more data for the rest of the 
+     year.
+     <div align="center"><img src="img/year_box_plot_ex.png" width="600px" height="500px"></div>
+     <div align="center"><img src="img/months_box_plot_ex.png" width="600px" height="500px"></div>
   
     and to have a clear idea there is a figure showing every month price box plot with hue by the year like in the following picture.
 
-    <div align="center"><img src="img/box_plot_per_year_ex.jpg" width="500px" height="500px"></div>
+    <div align="center"><img src="img/box_plot_per_year_ex.png" width="1000px" height="500px"></div>
   
     - Finally, there are two figures showing the price time series before and after making it stationarylike in the following pictures.
-      <div align="center"><img src="img/not_stationary_ex.jpg" width="500px" height="500px"></div>
-  
-  <div align="center"><img src="img/stationary_ex.jpg" width="500px" height="500px"></div>
-
-
+      <div align="center"><img src="img/not_stationary_ex.png" width="600px" height="500px"></div>
+      <div align="center"><img src="img/stationary_ex.png" width="600px" height="500px"></div>
       
+      All of this could be done by using only one function, which is `analysing_report` and passing both of the data names which is **SBER** in this case, and the sheet number in the excel file.
+
+
+### 1.2) Using `models.py` file to:
+The `analysis_report` function output will be used for:
+- Statical and machine learning models:
+  - Arima.
+  - Sarima.
+  - Arimax.
+  - Prophet.
+ 
+For all of the statical models, auto models were have been used to adjust the model parameters.
+
+- Deep learinig models:
+ 
+   - Univariate LSTM:
+      - Vanilla LSTM with the price feature only with **100** hidden units.
+
+    - Multivariate LSTM:
+      - Vanilla LSTM with the `open`, `high`, `low`, `vol` and `change` features.
+
+    - Univariate ConvLSTM:
+      - ConvLSTM with only the `price` column with one layer with `64` hidden units.
+
+    - Multivariate ConvLSTM:
+      - ConvLSTM with `open`, `high`, `low`, `vol` and `change` features with one layer with `64` hidden units.
+
+- Plotting the predictions VS. real price, as well as plotting the Train VS. Val Loss scores for the deep learning models as in the following pictures.
+    <div align="center"><img src="img/predictions.png" width="1000px" height="500px"></div>
+    <div align="center"><img src="img/train_val_loss.png" width="1000px" height="500px"></div>
+
+- Plotting the Bollinger band for the best model for each dataset and saving the prediction as well as the labels which are the buy signal, sell signal and hold signal into a new CSV file in the output folder as in the following picture.
+    <div align="center"><img src="img/bollinger_band_ex.png" width="1000px" height="500px"></div>
+
+
+
