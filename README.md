@@ -133,4 +133,4 @@ All of this could be done by using only one function, which is `models_report` a
 
 ## Conclusion:
 <hr style="height:1.5px;border-width:10;color:blue;background-color:black">
-
+The stock market in all of the 8 companies suffers in Mar and the market correct itself around May which is make sense with the coronavirus pandemic. For the modelling, **Arimax** shows a great result with all of the datasets.
