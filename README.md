@@ -116,7 +116,7 @@ For all of the statical models, auto models were have been used to adjust the mo
       - ConvLSTM with `open`, `high`, `low`, `vol` and `change` features with one layer with `64` hidden units.
 
 - Plotting the predictions VS. real price, as well as plotting the Train VS. Val Loss scores for the deep learning models as in the following pictures.
-    <div align="center"><img src="img/predictions.png" width="1000px" height="500px"></div>
+    <div align="center"><img src="img/prediction.png" width="1000px" height="400px"></div>
     <div align="center"><img src="img/train_val_loss.png" width="1000px" height="500px"></div>
 
 - Plotting the Bollinger band for the best model for each dataset and saving the prediction as well as the labels which are the buy signal, sell signal and hold signal into a new CSV file in the output folder as in the following picture.
