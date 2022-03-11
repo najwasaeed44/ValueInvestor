@@ -72,21 +72,21 @@ To achieve this, both the `analysing.py` and `models.py` python files will be us
  
  - Plotting some stat:
    - The price to notice if there are any trends and to take a general idea about the price time series, like in the following picture.
-       <div align="center"><img src="img/price_ex.png" width="1000px" height="500px"></div>
+       <div align="center"><img src="img/price_ex.png" width="1000px" height="400px"></div>
 
    - The year and months box plot as in the following pictures, but we need to take into our mind that, 
      the available data in `2021` is only for the first quarter, so this could be changing with more data for the rest of the 
      year.
-     <div align="center"><img src="img/year_box_plot_ex.png" width="600px" height="500px"></div>
-     <div align="center"><img src="img/months_box_plot_ex.png" width="600px" height="500px"></div>
+     <div align="center"><img src="img/year_box_plot_ex.png" width="600px" height="400px"></div>
+     <div align="center"><img src="img/months_box_plot_ex.png" width="600px" height="400px"></div>
   
     and to have a clear idea there is a figure showing every month price box plot with hue by the year like in the following picture.
 
-    <div align="center"><img src="img/box_plot_per_year_ex.png" width="1000px" height="500px"></div>
+    <div align="center"><img src="img/box_plot_per_year_ex.png" width="1000px" height="400px"></div>
   
     - Finally, there are two figures showing the price time series before and after making it stationarylike in the following pictures.
-      <div align="center"><img src="img/not_stationary_ex.png" width="600px" height="500px"></div>
-      <div align="center"><img src="img/stationary_ex.png" width="600px" height="500px"></div>
+      <div align="center"><img src="img/not_stationary_ex.png" width="600px" height="400px"></div>
+      <div align="center"><img src="img/stationary_ex.png" width="600px" height="400px"></div>
       
       All of this could be done by using only one function, which is `analysing_report` and passing both of the data names which is **SBER** in this case, and the sheet number in the excel file.
 
@@ -117,10 +117,10 @@ For all of the statical models, auto models were have been used to adjust the mo
 
 - Plotting the predictions VS. real price, as well as plotting the Train VS. Val Loss scores for the deep learning models as in the following pictures.
     <div align="center"><img src="img/prediction.png" width="1000px" height="400px"></div>
-    <div align="center"><img src="img/train_val_loss.png" width="1000px" height="500px"></div>
+    <div align="center"><img src="img/train_val_loss.png" width="1000px" height="400px"></div>
 
 - Plotting the Bollinger band for the best model for each dataset and saving the prediction as well as the labels which are the buy signal, sell signal and hold signal into a new CSV file in the output folder as in the following picture.
-    <div align="center"><img src="img/bollinger_band_ex.png" width="1000px" height="500px"></div>
+    <div align="center"><img src="img/bollinger_band_ex.png" width="1000px" height="400px"></div>
 
 
 
