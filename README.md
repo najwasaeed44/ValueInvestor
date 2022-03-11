@@ -58,7 +58,7 @@ This work will be divided into three parts, which are:
 
 To achieve this, both the `analysing.py` and `models.py` python files will be used.
 
-### 1.1) Using `analysing.py` file to:
+### 1) Using `analysing.py` file to:
   - Data preprocessing: 
     - Make the index equal to the date. 
     - Remove special characters or string(s) like the "M" in the `vol` column, which mean the volume in millions. 
@@ -91,7 +91,7 @@ To achieve this, both the `analysing.py` and `models.py` python files will be us
       All of this could be done by using only one function, which is `analysing_report` and passing both of the data names which is **SBER** in this case, and the sheet number in the excel file.
 
 
-### 1.2) Using `models.py` file to:
+### 2) Using `models.py` file to:
 The `analysis_report` function output will be used for:
 - Statical and machine learning models:
   - Arima.
@@ -124,3 +124,4 @@ For all of the statical models, auto models were have been used to adjust the mo
 
 
 
+### 3) Build a Classifier:
