@@ -48,7 +48,7 @@ Predict stock price valuations on a daily, weekly and monthly basis. Recommend B
 <hr style="height:1.5px;border-width:10;color:blue;background-color:black">
 
 
-This work will be divided into three parts, which are:
+This repository will predict the stock price for 8 different companies and each dataset will be divided into three parts, which are:
 
 **1) Analysing and preprocessing the data.**
 
@@ -56,7 +56,7 @@ This work will be divided into three parts, which are:
 
 **3) Building a classifier to predict to buy, sell or hold the stock based on the training features.**
 
-To achieve this, both the `analysing.py` and `models.py` python files will be used.
+To achieve this, both the `analysing_report.py` and `models.py` python files will be used. So, let's see what every dataset going through:
 
 ### 1) Using `analysing.py` file to:
   - Data preprocessing: 
@@ -64,14 +64,14 @@ To achieve this, both the `analysing.py` and `models.py` python files will be us
     - Remove special characters or string(s) like the "M" in the `vol` column, which mean the volume in millions. 
     - Transform all the value in thousands of units to million.
   - Make the time series stationary:
-    - Check if the price column is stationary or not, and if it's not, the price time series will transform to stationary by taking the difference between every data point and the previous one.
+    - Check if the price column is stationary or not, and if it's not, the price time series will be transform to stationary by taking the difference between every data point and the previous one.
     
   - Add new features:
-    - Make new features from the existing ones by taking the mean and the standard deviation for each original column for 3, 7, and 30 days and adding them as new columns. 
-    - With testing different features with different models, it seems the models' performance is better with the original features only.
+    - Make new features from the existing ones by taking the mean and the standard deviation for all of the original columns for `3`, `7`, and `30` days and adding them as new columns. 
+    - **Note:** With testing different features with different models, it seems the models' performance is better with the original features only.
  
  - Plotting some stat:
-   - The price to notice if there are any trends and to take a general idea about the price time series, like in the following picture.
+   - Plotting the price to notice if there are any trends and to take a general idea about the price time series, like in the following picture.
        <div align="center"><img src="img/price_ex.png" width="1000px" height="400px"></div>
 
    - The year and months box plot as in the following pictures, but we need to take into our mind that, 
@@ -80,19 +80,19 @@ To achieve this, both the `analysing.py` and `models.py` python files will be us
      <div align="center"><img src="img/year_box_plot_ex.png" width="600px" height="400px"></div>
      <div align="center"><img src="img/months_box_plot_ex.png" width="600px" height="400px"></div>
   
-    and to have a clear idea there is a figure showing every month price box plot with hue by the year like in the following picture.
+    and to have a clear idea, there is a figure showing every month price box plot with hue by the `year` like in the following picture.
 
     <div align="center"><img src="img/box_plot_per_year_ex.png" width="1000px" height="400px"></div>
   
-    - Finally, there are two figures showing the price time series before and after making it stationarylike in the following pictures.
+    - Finally, there are two figures showing the price time series before and after making it stationary like in the following pictures.
       <div align="center"><img src="img/not_stationary_ex.png" width="600px" height="400px"></div>
       <div align="center"><img src="img/stationary_ex.png" width="600px" height="400px"></div>
       
-      All of this could be done by using only one function, which is `analysing_report` and passing both of the data names which is **SBER** in this case, and the sheet number in the excel file.
+      All of this could be done by using only one function, which is `analysing_report` and passing both of the data names which is **SBER** in this case, and the sheet number in the excel file which is **0** in this case.
 
 
 ### 2) Using `models.py` file to:
-The `analysis_report` function output will be used for:
+The `analysis_report` function output will be used in `models.py` for:
 - Statical and machine learning models:
   - Arima.
   - Sarima.
@@ -107,7 +107,7 @@ For all of the statical models, auto models were have been used to adjust the mo
       - Vanilla LSTM with the price feature only with **100** hidden units.
 
     - Multivariate LSTM:
-      - Vanilla LSTM with the `open`, `high`, `low`, `vol` and `change` features.
+      - Vanilla LSTM with the `open`, `high`, `low`, `vol` and `change` features with 100 hidden units.
 
     - Univariate ConvLSTM:
       - ConvLSTM with only the `price` column with one layer with `64` hidden units.
@@ -115,13 +115,22 @@ For all of the statical models, auto models were have been used to adjust the mo
     - Multivariate ConvLSTM:
       - ConvLSTM with `open`, `high`, `low`, `vol` and `change` features with one layer with `64` hidden units.
 
-- Plotting the predictions VS. real price, as well as plotting the Train VS. Val Loss scores for the deep learning models as in the following pictures.
+- Plotting the **predictions VS. real price**, as well as plotting the **Train VS. Val Loss scores** for the deep learning models as in the following pictures.
     <div align="center"><img src="img/prediction.png" width="1000px" height="400px"></div>
     <div align="center"><img src="img/train_val_loss.png" width="1000px" height="400px"></div>
 
-- Plotting the Bollinger band for the best model for each dataset and saving the prediction as well as the labels which are the buy signal, sell signal and hold signal into a new CSV file in the output folder as in the following picture.
+- Plotting the Bollinger band for the best model for each dataset and saving the prediction as well as the labels which are the `buy signal`, `sell signal` and `hold signal` into a new **CSV** file in the output folder as in the following picture.
     <div align="center"><img src="img/bollinger_band_ex.png" width="1000px" height="400px"></div>
 
-
+All of this could be done by using only one function, which is `models_report` and passing both of the data names which is **SBER** in this case, and the dataframe.
 
 ### 3) Build a Classifier:
+
+
+[//]: # (&#40;____________________________________ CONCLUSION____________________________________&#41;)
+
+<img src="https://media4.giphy.com/media/MbMUCH4MUffka1ZFeT/giphy.gif?cid=790b7611040baf4e7332c491694685e3367d8fe931cd7a69&rid=giphy.gif&ct=s"  width="80" height="60" align="left">
+
+## Conclusion:
+<hr style="height:1.5px;border-width:10;color:blue;background-color:black">
+
