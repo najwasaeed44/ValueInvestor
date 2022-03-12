@@ -125,6 +125,8 @@ For all of the statical models, auto models were have been used to adjust the mo
 All of this could be done by using only one function, which is `models_report` and passing both of the data names which is **SBER** in this case, and the dataframe.
 
 
+<br><br>
+
 
 [//]: # (&#40;____________________________________ CONCLUSION____________________________________&#41;)
 
