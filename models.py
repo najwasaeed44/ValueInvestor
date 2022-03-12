@@ -356,8 +356,48 @@ def implement_bb_strategy(predictions, rate, model_name):
     plt.title(f'Bollinger Bands Strategy Trading Signals for {model_name}', fontsize=20)
     plt.legend(loc = 'upper left')
     plt.show()
+    return labels_df
+
+def percentage(df):
+    percentage_list = []
+    index_list = [0]
+    for i in range(len(df)):
+        if df.buy_signal[i] == 1 or df.sell_signal[i] == 1:
+            index_list.append(i)
+    index_list.append(df.shape[0]-1)
+
+    for i in range(len(df)):
+        if len(df[df.buy_signal.astype(str).str.contains("1") == True]) != 0 or len(df[df.sell_signal.astype(str).str.contains("1") == True]) != 0:
+            if df.buy_signal[i] == 1 or df.sell_signal[i] == 1: 
+                for j in range (len(index_list)):
+                    if j == len(index_list)-1:
+                        break
+
+                    if j == len(index_list) -3:
+                        start = index_list[j+1]
+                        end = index_list[-1]
+                    else:
+                        start = index_list[j]
+                        end = index_list[j+1]
+                        if j == len(index_list) -2:
+                            break
+                    difference = df.price[end] - df.price[start]
+                    percent = (difference/df.price[start]) * 100
+                    percentage_list.append(percent)
+
+                break
+
+
+        else:
+            difference = df.price[df.shape[0]-1] - df.price[0]
+            percent = (difference/df.price[0]) * 100
+            percentage_list.append(percent)
+            break
     
-    
+    return (f'The saved percentage of money by following the model recommendations is: {percentage_list}')
+
+
+
 
 def stat_ml_models(df, data_name, X_train, y_train, X_test, y_test, scores_dict):
     """
@@ -500,7 +540,7 @@ def models_report(df, data_name):
     #Create a scoring data frame and functiont to add score
     scores_dict = {"Model":[],"Test Score":[]}
     # 2) use the stat_ml_models funtion to find the predictions for arima, sarima, arimax and prophet models
-    arima_model_name, arima_y_pred, sarima_model_name, sarima_y_pred, arimax_model_name, arimax_y_pred, prophet_model_name, prophet_y_pred = stat_ml_models(df, data_name, X_train, y_train, X_test, y_test, scores_dict)
+    arima_model_name, arima_y_pred, sarima_model_name, sarima_y_pred, arimax_model_name, arimax_y_pred , prophet_model_name, prophet_y_pred= stat_ml_models(df, data_name, X_train, y_train, X_test, y_test, scores_dict)
     
     # 3) use the univariate_LSTM function to find the univariate LSTM model predictions
     univariate_LSTM_model_name, univariate_LSTM_y_pred = univariate_LSTM(data_name, y_train, y_test, scores_dict)
@@ -516,6 +556,7 @@ def models_report(df, data_name):
     predictions_dict = {arima_model_name : arima_y_pred,
                         sarima_model_name : sarima_y_pred,
                         arimax_model_name : arimax_y_pred,
+                        prophet_model_name : prophet_y_pred,
                         univariate_LSTM_model_name : univariate_LSTM_y_pred,
                         univariate_conv_model_name : univariate_conv_y_pred,
                         multivariate_LSTM_model_name : multivariate_LSTM_y_pred,
@@ -532,8 +573,21 @@ def models_report(df, data_name):
             
     
     # 11) implement the bb strategy
-    implement_bb_strategy(list(bb_predictions), 20, min_score) 
+    labels_df = implement_bb_strategy(list(bb_predictions), 20, min_score) 
+    labels_df = labels_df.fillna(0)
+    labels_df.loc[labels_df.buy_signal != 0, "buy_signal"] = 1
+    labels_df.loc[labels_df.sell_signal != 0, "sell_signal"] = 1
+    labels_df.loc[labels_df.hold_signal != 0, "hold_signal"] = 1
+    features = X_test[['Open', 'High', 'Low', 'Vol.', 'Change %']]
+    features['price'] = y_test
+    predictions_df = features.tail(labels_df.shape[0])
+    predictions_df = predictions_df.reset_index(drop=True)
+    predictions_with_label_df = pd.concat([predictions_df, labels_df], axis=1)
+    predictions_with_label_df.to_csv(f"output/predictions with labels/{data_name}_predictions_with_label_df.csv")
+    saved_money = percentage(predictions_with_label_df)
+    print(saved_money)
     return scores_dict
+
     
     
     
