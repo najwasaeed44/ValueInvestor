@@ -48,13 +48,12 @@ Predict stock price valuations on a daily, weekly and monthly basis. Recommend B
 <hr style="height:1.5px;border-width:10;color:blue;background-color:black">
 
 
-This repository will predict the stock price for 8 different companies and each dataset will be divided into three parts, which are:
+This repository will predict the stock price for 8 different companies and each dataset will be divided into two parts, which are:
 
 **1) Analysing and preprocessing the data.**
 
-**2) Stock Price forecasting.**
+**2) Stock Price forecasting with the buy, sell and hold recommendations..**
 
-**3) Building a classifier to predict to buy, sell or hold the stock based on the training features.**
 
 To achieve this, both the `analysing_report.py` and `models.py` python files will be used. So, let's see what every dataset going through:
 
@@ -122,9 +121,9 @@ For all of the statical models, auto models were have been used to adjust the mo
 - Plotting the Bollinger band for the best model for each dataset and saving the prediction as well as the labels which are the `buy signal`, `sell signal` and `hold signal` into a new **CSV** file in the output folder as in the following picture.
     <div align="center"><img src="img/bollinger_band_ex.png" width="1000px" height="400px"></div>
 
+
 All of this could be done by using only one function, which is `models_report` and passing both of the data names which is **SBER** in this case, and the dataframe.
 
-### 3) Build a Classifier:
 
 
 [//]: # (&#40;____________________________________ CONCLUSION____________________________________&#41;)
@@ -133,4 +132,5 @@ All of this could be done by using only one function, which is `models_report` a
 
 ## Conclusion:
 <hr style="height:1.5px;border-width:10;color:blue;background-color:black">
-The stock market in all of the 8 companies suffers in Mar and the market correct itself around May which is make sense with the coronavirus pandemic. For the modelling, **Arimax** shows a great result with all of the datasets.
+
+The stock market in all of the 8 companies suffers in **Mar** and the market correct itself around **May** which is make sense with the coronavirus pandemic. For the modelling, **Arimax** shows a great result with all of the datasets.
